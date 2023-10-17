@@ -50,7 +50,7 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### Необходимо заполнить env-файл для запуска
+### Необходимо заполнить env-файл для запуска (переписать)
 ```
 touch .env
 ```
