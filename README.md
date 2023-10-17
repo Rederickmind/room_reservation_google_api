@@ -1,2 +1,28 @@
-# room_reservation_google_api
-room_reservation with google_api support
+# room_reservation
+room_reservation FastAPI Project
+
+Установить в окружение зависимости из requirements.txt
+
+Запуск приложения:
+uvicorn app.main:app --reload
+
+
+### Заметки для себя. Переделать
+Установка и настройка Alembic
+Установите в виртуальное окружение библиотеку Alembic:
+(venv) ...$ pip install alembic==1.7.7 
+Теперь нужно инициализировать Alembic в проекте, делается это при помощи команды alembic init. 
+Вы пишете асинхронный код, поэтому в команде следует указать, что Alembic должен использовать асинхронный шаблон --template async (или короткая форма -t async). 
+Последним аргументом в команде указывается директория, где нужно создать файлы Alembic. Традиционно её называют по имени библиотеки, но можно дать этой директории любое название, например — migrations.
+В корневой директории проекта выполните команду:
+(venv) ...$ alembic init --template async alembic 
+
+Генерация миграций
+alembic revision --autogenerate -m "First migration"
+
+Применение миграций
+alembic upgrade head
+
+Если что-то пошло не так — можно отменить миграции: одну, несколько или вообще все.
+Чтобы отменить все миграции, которые были в проекте, используется команда:
+(venv) ...$ alembic downgrade base 
