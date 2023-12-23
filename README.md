@@ -15,6 +15,10 @@
 - FastAPI Users 10.0.6
 - Uvicorn
 
+### Полезные ссылки
+- Консоль Google Cloud Platform https://console.cloud.google.com/projectselector2/home/dashboard?pli=1
+- Google Cloud Platform - настройка API и получение ключей https://docs.google.com/document/d/1SWn7jXcjgNQAjnktgsbKEhSZtO-hbzM7-vZ9mwXojug/edit?usp=sharing
+
 ### Установка и запуск
 
 **Клонируйте репозиторий:**
@@ -79,9 +83,6 @@ AUTH_PROVIDER_X509_CERT_URL =  "..."
 CLIENT_X509_CERT_URL = "..."
 UNIVERSE_DOMAIN = "..."
 ```
-
-
-
 
 ### Необходимо инициализировать Alembic в проекте, создать и выполнить миграции:
 - следует указать, что Alembic должен использовать асинхронный шаблон --template async (или короткая форма -t async)
