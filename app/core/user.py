@@ -1,4 +1,3 @@
-# app/core/user.py
 from typing import Optional, Union
 
 from fastapi import Depends, Request
@@ -22,17 +21,13 @@ async def get_user_db(
         ):
     yield SQLAlchemyUserDatabase(session, User)
 
-# Определяем транспорт: передавать токен будем
-# через заголовок HTTP-запроса Authorization: Bearer.
+# Определяем транспорт: заголовок HTTP-запроса Authorization: Bearer.
 # Указываем URL эндпоинта для получения токена.
 bearer_transport = BearerTransport(tokenUrl='auth/jwt/login')
 
 
 # Определяем стратегию: хранение токена в виде JWT.
 def get_jwt_strategy() -> JWTStrategy:
-    # В специальный класс из настроек приложения
-    # передаётся секретное слово, используемое для генерации токена.
-    # Вторым аргументом передаём срок действия токена в секундах.
     return JWTStrategy(secret=settings.secret, lifetime_seconds=3600)
 
 
@@ -46,10 +41,7 @@ auth_backend = AuthenticationBackend(
 
 class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
 
-    # Здесь можно описать свои условия валидации пароля.
-    # При успешной валидации функция ничего не возвращает.
-    # При ошибке валидации будет вызван специальный класс ошибки
-    # InvalidPasswordException.
+    # Условия валидации пароля.
     async def validate_password(
         self,
         password: str,
@@ -68,7 +60,6 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
     async def on_after_register(
             self, user: User, request: Optional[Request] = None
     ):
-        # Вместо print здесь можно было бы настроить отправку письма.
         print(f'Пользователь {user.email} зарегистрирован.')
 
 

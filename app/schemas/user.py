@@ -1,4 +1,3 @@
-# app/schemas/user.py
 from fastapi_users import schemas
 
 

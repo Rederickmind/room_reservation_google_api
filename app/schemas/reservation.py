@@ -1,4 +1,3 @@
-# app/schemas/reservation.py
 from datetime import datetime, timedelta
 from typing import Optional
 
@@ -42,7 +41,6 @@ class ReservationUpdate(ReservationBase):
         return values
 
 
-# Этот класс наследуем от ReservationUpdate с валидаторами.
 class ReservationCreate(ReservationUpdate):
     meetingroom_id: int
 
@@ -50,7 +48,6 @@ class ReservationCreate(ReservationUpdate):
 class ReservationDB(ReservationBase):
     id: int
     meetingroom_id: int
-    # Добавьте опциональное поле user_id.
     user_id: Optional[int]
 
     class Config:

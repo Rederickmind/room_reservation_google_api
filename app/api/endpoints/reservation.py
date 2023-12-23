@@ -1,4 +1,3 @@
-# app/api/endpoints/reservation.py
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -50,7 +49,6 @@ async def get_all_reservations(
         session: AsyncSession = Depends(get_async_session),
 ):
     """Только для суперюзеров."""
-    # Замените вызов функции на вызов метода.
     all_reservations = await reservation_crud.get_multi(session)
     return all_reservations
 
@@ -62,15 +60,12 @@ async def get_all_reservations(
 async def delete_reservation(
         reservation_id: int,
         session: AsyncSession = Depends(get_async_session),
-        # Новая зависимость.
         user: User = Depends(current_user),
 ):
     """Для суперюзеров или создателей объекта бронирования."""
     reservation = await check_reservation_before_edit(
-        # Дописываем передачу user в валидатор.
         reservation_id, session, user
     )
-    # Замените вызов функции на вызов метода.
     reservation = await reservation_crud.remove(
         reservation,
         session
@@ -86,7 +81,6 @@ async def update_reservation(
         reservation_id: int,
         obj_in: ReservationUpdate,
         session: AsyncSession = Depends(get_async_session),
-        # Новая зависимость.
         user: User = Depends(current_user),
 ):
     # Проверяем, что такой объект бронирования вообще существует.
@@ -106,8 +100,6 @@ async def update_reservation(
     )
     reservation = await reservation_crud.update(
         db_obj=reservation,
-        # На обновление передаем объект класса ReservationUpdate,
-        # как и требуется.
         obj_in=obj_in,
         session=session,
     )
@@ -125,7 +117,6 @@ async def get_my_reservations(
     user: User = Depends(current_user),
 ):
     """Получает список всех бронирований для текущего пользователя."""
-    # Вызываем созданный метод.
     reservations = await reservation_crud.get_by_user(
         session=session, user=user
     )

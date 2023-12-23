@@ -26,10 +26,8 @@ router.include_router(
 
 
 @router.delete(
-    # Путь и тег полностью копируют параметры эндпоинта по умолчанию.
     '/users/{id}',
     tags=['users'],
-    # Параметр, который показывает, что метод устарел.
     deprecated=True
 )
 def delete_user(id: str):

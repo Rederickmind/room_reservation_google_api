@@ -57,7 +57,6 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             self,
             obj_in,
             session: AsyncSession,
-            # Добавьте опциональный параметр user.
             user: Optional[User] = None
     ):
         obj_in_data = obj_in.dict()

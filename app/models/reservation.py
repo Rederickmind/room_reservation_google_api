@@ -1,5 +1,3 @@
-# app/models/reservation.py
-# Импортируйте классы.
 from sqlalchemy import Column, DateTime, ForeignKey, Integer
 
 from app.core.db import Base

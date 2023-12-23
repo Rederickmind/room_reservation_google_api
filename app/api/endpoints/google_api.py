@@ -1,8 +1,4 @@
-# ...app/api/endpoints/google_api.py
-
-# Понадобится для того, чтобы задать временные интервалы
 from datetime import datetime
-# Класс «обёртки»
 from aiogoogle import Aiogoogle
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -17,8 +13,6 @@ from app.services.google_api import (
     spreadsheets_update_value
 )
 
-
-# Создаём экземпляр класса APIRouter
 router = APIRouter()
 
 
@@ -38,7 +32,6 @@ async def get_report(
     reservations = await reservation_crud.get_count_res_at_the_same_time(
         from_reserve, to_reserve, session
     )
-    # Вызов функций
     spreadsheetid = await spreadsheets_create(wrapper_services)
     await set_user_permissions(spreadsheetid, wrapper_services)
     await spreadsheets_update_value(spreadsheetid,

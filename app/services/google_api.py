@@ -1,9 +1,6 @@
-# app/services/google_api.py
-
 from datetime import datetime
 
 from aiogoogle import Aiogoogle
-# В секретах лежит адрес вашего личного google-аккаунта
 from app.core.config import settings
 
 # Константа с форматом строкового представления времени
@@ -66,7 +63,7 @@ async def spreadsheets_update_value(
         ['Количество регистраций переговорок'],
         ['ID переговорки', 'Кол-во бронирований']
     ]
-    # Здесь в таблицу добавляются строчки
+    # Добавление строк в таблицу
     for res in reservations:
         new_row = [str(res['meetingroom_id']), str(res['count'])]
         table_values.append(new_row)
@@ -75,6 +72,7 @@ async def spreadsheets_update_value(
         'majorDimension': 'ROWS',
         'values': table_values
     }
+
     response = await wrapper_services.as_service_account(
         service.spreadsheets.values.update(
             spreadsheetId=spreadsheetid,

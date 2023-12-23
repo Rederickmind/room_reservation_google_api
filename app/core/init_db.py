@@ -1,4 +1,3 @@
-# app/core/init_db.py
 import contextlib
 
 from fastapi_users.exceptions import UserAlreadyExists

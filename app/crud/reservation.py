@@ -7,12 +7,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.crud.base import CRUDBase
 from app.models import Reservation, User
 
-from sqlalchemy import and_, between, func, or_, select
+from sqlalchemy import and_, func, select
 
 reservation_crud = CRUDBase(Reservation)
 
 
-# Новый класс должен быть унаследован от CRUDBase.
 class CRUDReservation(CRUDBase):
 
     async def get_reservations_at_the_same_time(
@@ -26,12 +25,9 @@ class CRUDReservation(CRUDBase):
             from_reserve: datetime,
             to_reserve: datetime,
             meetingroom_id: int,
-            # Добавляем новый опциональный параметр - id объекта бронирования.
             reservation_id: Optional[int] = None,
             session: AsyncSession,
     ) -> list[Reservation]:
-        # Здесь будет код метода.
-        # Выносим уже существующий запрос в отдельное выражение.
         select_stmt = select(Reservation).where(
             Reservation.meetingroom_id == meetingroom_id,
             and_(
@@ -46,7 +42,6 @@ class CRUDReservation(CRUDBase):
                 # id искомых объектов не равны id обновляемого объекта.
                 Reservation.id != reservation_id
             )
-        # Выполняем запрос.
         reservations = await session.execute(select_stmt)
         reservations = reservations.scalars().all()
         return reservations
